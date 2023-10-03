@@ -10,6 +10,7 @@ import {
   CheckBox,
   Alert,
   Image,
+  ImageBackground,
 } from "react-native";
 import * as Print from "expo-print";
 import generateContent from "../components/pdfTemplate01";
@@ -535,17 +536,24 @@ function InputScreen({ navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.settingsContainer}>
-        <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
-          <Image style={styles.img} source={require("../setting.png")}></Image>
-        </TouchableOpacity>
-      </View>
+      <ImageBackground
+        style={styles.bg}
+        //source={require("../bg_gradient_dark.png")}
+      >
+        <View style={styles.settingsContainer}>
+          <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
+            <Image
+              style={styles.img}
+              source={require("../setting.png")}
+            ></Image>
+          </TouchableOpacity>
+        </View>
 
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Udfyld rapport</Text>
-      </View>
-      <View>
-        {/*<Collapse style={styles.collapseContainer}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Udfyld rapport</Text>
+        </View>
+        <View>
+          {/*<Collapse style={styles.collapseContainer}>
           <CollapseHeader>
             <View>
               <Text style={{textAlign: 'center', paddingVertical: 30, fontSize:20, fontWeight:'bold'}}>Oplysninger</Text>
@@ -556,144 +564,157 @@ function InputScreen({ navigation }) {
           </CollapseBody>
         </Collapse>*/}
 
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputGroupTitle}>Grundlæggende info</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Tekniker navn"
-            onChangeText={handleNameChange}
-            value={name}
-            ref={teknikerNavnRef}
-            onSubmitEditing={() =>
-              handleNextInput(teknikerNavnRef, kundenavnRef)
-            }
-            returnKeyType="next"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Kundenavn"
-            onChangeText={setCustomerName}
-            value={customerName}
-            ref={kundenavnRef}
-            onSubmitEditing={() => handleNextInput(kundenavnRef, adresseRef)}
-            returnKeyType="next"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Adresse"
-            onChangeText={setAdress}
-            value={address}
-            ref={adresseRef}
-            onSubmitEditing={() => handleNextInput(adresseRef, postnummerRef)}
-            returnKeyType="next"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Postnummer"
-            onChangeText={setPostNr}
-            value={postNr}
-            keyboardType="numeric"
-            ref={postnummerRef}
-            onSubmitEditing={() => handleNextInput(postnummerRef, firmaRef)}
-            returnKeyType="done"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Firma"
-            onChangeText={setCompany}
-            value={company}
-            ref={firmaRef}
-            onSubmitEditing={() => handleNextInput(firmaRef, måleudstyrRef)}
-            returnKeyType="next"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Måleudstyr"
-            onChangeText={setGear}
-            value={gear}
-            ref={måleudstyrRef}
-            onSubmitEditing={() =>
-              handleNextInput(måleudstyrRef, ventilationsanlægRef)
-            }
-            returnKeyType="next"
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputGroupTitle}>Ventilationstype</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Ventilationsanlæg"
-            onChangeText={setVent}
-            value={vent}
-            ref={ventilationsanlægRef}
-            onSubmitEditing={() =>
-              handleNextInput(ventilationsanlægRef, modelRef)
-            }
-            returnKeyType="next"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Model"
-            onChangeText={setModel}
-            value={model}
-            ref={modelRef}
-            onSubmitEditing={() => handleNextInput(modelRef, trinValgtRef)}
-            returnKeyType="next"
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Trin valgt"
-            onChangeText={setTrin}
-            value={trin}
-            keyboardType="numeric"
-            returnKeyType="done"
-            ref={trinValgtRef}
-            onSubmitEditing={() => handleNextInput(trinValgtRef, antalM2Ref)}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Antal m2"
-            onChangeText={setM2}
-            value={m2}
-            keyboardType="numeric"
-            returnKeyType="done"
-            ref={antalM2Ref}
-            onSubmitEditing={() => handleNextInput(antalM2Ref, wattYdelseRef)}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Watt ydelse"
-            onChangeText={setWatt}
-            value={watt}
-            keyboardType="numeric"
-            returnKeyType="done"
-            ref={wattYdelseRef}
-          />
-        </View>
-
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputGroupTitle}>SEL Værdi</Text>
-          <Text style={{ fontSize: 16 }}>{SEL_Value}</Text>
-        </View>
-
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputGroupTitle}>Kontrol</Text>
-          <View style={styles.checkboxContainer}>
-            {checkboxes.map((checkbox, index) => (
-              <View style={styles.checkbox} key={index}>
-                <BouncyCheckbox
-                  isChecked={checkbox.isChecked}
-                  text={checkbox.displayText}
-                  onPress={(isChecked) => handleCheckboxPress(index, isChecked)}
-                  disableTextDecoration={true}
-                  textStyle={{ textDecorationLine: "none" }}
-                />
-              </View>
-            ))}
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputGroupTitle}>Grundlæggende info</Text>
+            <Text style={styles.label}>Navn på tekniker</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Tekniker navn"
+              onChangeText={handleNameChange}
+              value={name}
+              ref={teknikerNavnRef}
+              onSubmitEditing={() =>
+                handleNextInput(teknikerNavnRef, kundenavnRef)
+              }
+              returnKeyType="next"
+            />
+            <Text style={styles.label}>Kundenavn</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Kundenavn"
+              onChangeText={setCustomerName}
+              value={customerName}
+              ref={kundenavnRef}
+              onSubmitEditing={() => handleNextInput(kundenavnRef, adresseRef)}
+              returnKeyType="next"
+            />
+            <Text style={styles.label}>Adresse</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Adresse"
+              onChangeText={setAdress}
+              value={address}
+              ref={adresseRef}
+              onSubmitEditing={() => handleNextInput(adresseRef, postnummerRef)}
+              returnKeyType="next"
+            />
+            <Text style={styles.label}>Postnummer</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Postnummer"
+              onChangeText={setPostNr}
+              value={postNr}
+              keyboardType="numeric"
+              ref={postnummerRef}
+              onSubmitEditing={() => handleNextInput(postnummerRef, firmaRef)}
+              returnKeyType="done"
+            />
+            <Text style={styles.label}>Firma</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Firma"
+              onChangeText={setCompany}
+              value={company}
+              ref={firmaRef}
+              onSubmitEditing={() => handleNextInput(firmaRef, måleudstyrRef)}
+              returnKeyType="next"
+            />
+            <Text style={styles.label}>Måleudstyr</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Måleudstyr"
+              onChangeText={setGear}
+              value={gear}
+              ref={måleudstyrRef}
+              onSubmitEditing={() =>
+                handleNextInput(måleudstyrRef, ventilationsanlægRef)
+              }
+              returnKeyType="next"
+            />
           </View>
-        </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputGroupTitle}>Ventilationstype</Text>
+            <Text style={styles.label}>Ventilationsanlæg</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Ventilationsanlæg"
+              onChangeText={setVent}
+              value={vent}
+              ref={ventilationsanlægRef}
+              onSubmitEditing={() =>
+                handleNextInput(ventilationsanlægRef, modelRef)
+              }
+              returnKeyType="next"
+            />
+            <Text style={styles.label}>Model</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Model"
+              onChangeText={setModel}
+              value={model}
+              ref={modelRef}
+              onSubmitEditing={() => handleNextInput(modelRef, trinValgtRef)}
+              returnKeyType="next"
+            />
+            <Text style={styles.label}>Trin valgt</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Trin valgt"
+              onChangeText={setTrin}
+              value={trin}
+              keyboardType="numeric"
+              returnKeyType="done"
+              ref={trinValgtRef}
+              onSubmitEditing={() => handleNextInput(trinValgtRef, antalM2Ref)}
+            />
+            <Text style={styles.label}>Antal m2</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Antal m2"
+              onChangeText={setM2}
+              value={m2}
+              keyboardType="numeric"
+              returnKeyType="done"
+              ref={antalM2Ref}
+              onSubmitEditing={() => handleNextInput(antalM2Ref, wattYdelseRef)}
+            />
+            <Text style={styles.label}>Watt ydelse</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Watt ydelse"
+              onChangeText={setWatt}
+              value={watt}
+              keyboardType="numeric"
+              returnKeyType="done"
+              ref={wattYdelseRef}
+            />
+          </View>
 
-        {/*<View style={styles.titleContainer}>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputGroupTitle}>SEL Værdi</Text>
+            <Text style={{ fontSize: 16 }}>{SEL_Value}</Text>
+          </View>
+
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputGroupTitle}>Kontrol</Text>
+            <View style={styles.checkboxContainer}>
+              {checkboxes.map((checkbox, index) => (
+                <View style={styles.checkbox} key={index}>
+                  <BouncyCheckbox
+                    isChecked={checkbox.isChecked}
+                    text={checkbox.displayText}
+                    onPress={(isChecked) =>
+                      handleCheckboxPress(index, isChecked)
+                    }
+                    disableTextDecoration={true}
+                    textStyle={{ textDecorationLine: "none" }}
+                  />
+                </View>
+              ))}
+            </View>
+          </View>
+
+          {/*<View style={styles.titleContainer}>
           <Text
             style={{
               textAlign: "center",
@@ -706,207 +727,225 @@ function InputScreen({ navigation }) {
           </Text>
         </View> */}
 
-        <View style={styles.inputContainer}>
-          <Text style={[styles.inputGroupTitle, { paddingBottom: 10 }]}>
-            Udsugning
-          </Text>
-          <View style={styles.row}>
-            <View style={styles.column}>
-              <Text style={styles.inputGridTitle}>1. måling</Text>
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="bad 1"
-                onChangeText={set1st_1}
-                value={_1st_1}
-                keyboardType="numeric"
-                returnKeyType={_1st_1 && !isNaN(_1st_1) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(_1st_1Ref, _2nd_1Ref)}
-                ref={_1st_1Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="bad 2"
-                onChangeText={set2nd_1}
-                value={_2nd_1}
-                keyboardType="numeric"
-                returnKeyType={_2nd_1 && !isNaN(_2nd_1) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(_2nd_1Ref, _3rd_1Ref)}
-                ref={_2nd_1Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="køkken"
-                onChangeText={set3rd_1}
-                value={_3rd_1}
-                keyboardType="numeric"
-                returnKeyType={_3rd_1 && !isNaN(_3rd_1) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(_3rd_1Ref, _4th_1Ref)}
-                ref={_3rd_1Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="bryggers"
-                onChangeText={set4th_1}
-                value={_4th_1}
-                keyboardType="numeric"
-                returnKeyType={_4th_1 && !isNaN(_4th_1) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(_4th_1Ref, _5th_1Ref)}
-                ref={_4th_1Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="toilet"
-                onChangeText={set5th_1}
-                value={_5th_1}
-                keyboardType="numeric"
-                returnKeyType={_5th_1 && !isNaN(_5th_1) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(_5th_1Ref, _1st_2Ref)}
-                ref={_5th_1Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="andet..."
-                onChangeText={set6th_1}
-                value={_6th_1}
-                keyboardType="numeric"
-                returnKeyType="done"
-                ref={_6th_1Ref}
-              />
-            </View>
+          <View style={styles.inputContainer}>
+            <Text style={[styles.inputGroupTitle, { paddingBottom: 10 }]}>
+              Udsugning
+            </Text>
+            <View style={styles.row}>
+              <View style={styles.column}>
+                <Text style={styles.inputGridTitle}>1. måling</Text>
+                <Text style={styles.subheading}>Bad 1</Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="bad 1"
+                  onChangeText={set1st_1}
+                  value={_1st_1}
+                  keyboardType="numeric"
+                  returnKeyType={_1st_1 && !isNaN(_1st_1) ? "done" : "next"}
+                  onSubmitEditing={() => handleNextInput(_1st_1Ref, _2nd_1Ref)}
+                  ref={_1st_1Ref}
+                />
+                <Text style={styles.subheading}>Bad 2</Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="bad 2"
+                  onChangeText={set2nd_1}
+                  value={_2nd_1}
+                  keyboardType="numeric"
+                  returnKeyType={_2nd_1 && !isNaN(_2nd_1) ? "done" : "next"}
+                  onSubmitEditing={() => handleNextInput(_2nd_1Ref, _3rd_1Ref)}
+                  ref={_2nd_1Ref}
+                />
+                <Text style={styles.subheading}>Køkken</Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="køkken"
+                  onChangeText={set3rd_1}
+                  value={_3rd_1}
+                  keyboardType="numeric"
+                  returnKeyType={_3rd_1 && !isNaN(_3rd_1) ? "done" : "next"}
+                  onSubmitEditing={() => handleNextInput(_3rd_1Ref, _4th_1Ref)}
+                  ref={_3rd_1Ref}
+                />
+                <Text style={styles.subheading}>Bryggers</Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="bryggers"
+                  onChangeText={set4th_1}
+                  value={_4th_1}
+                  keyboardType="numeric"
+                  returnKeyType={_4th_1 && !isNaN(_4th_1) ? "done" : "next"}
+                  onSubmitEditing={() => handleNextInput(_4th_1Ref, _5th_1Ref)}
+                  ref={_4th_1Ref}
+                />
+                <Text style={styles.subheading}>Toilet</Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="toilet"
+                  onChangeText={set5th_1}
+                  value={_5th_1}
+                  keyboardType="numeric"
+                  returnKeyType={_5th_1 && !isNaN(_5th_1) ? "done" : "next"}
+                  onSubmitEditing={() => handleNextInput(_5th_1Ref, _1st_2Ref)}
+                  ref={_5th_1Ref}
+                />
+                <Text style={styles.subheading}>Andet</Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="andet..."
+                  onChangeText={set6th_1}
+                  value={_6th_1}
+                  keyboardType="numeric"
+                  returnKeyType="done"
+                  ref={_6th_1Ref}
+                />
+              </View>
 
-            <View style={styles.column}>
-              <Text style={styles.inputGridTitle}>2. måling</Text>
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="bad 1"
-                onChangeText={set1st_2}
-                value={_1st_2}
-                keyboardType="numeric"
-                returnKeyType={_1st_2 && !isNaN(_1st_2) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(_1st_2Ref, _2nd_2Ref)}
-                ref={_1st_2Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="bad 2"
-                onChangeText={set2nd_2}
-                value={_2nd_2}
-                keyboardType="numeric"
-                returnKeyType={_2nd_2 && !isNaN(_2nd_2) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(_2nd_2Ref, _3rd_2Ref)}
-                ref={_2nd_2Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="køkken"
-                onChangeText={set3rd_2}
-                value={_3rd_2}
-                keyboardType="numeric"
-                returnKeyType={_3rd_2 && !isNaN(_3rd_2) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(_3rd_2Ref, _4th_2Ref)}
-                ref={_3rd_2Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="bryggers"
-                onChangeText={set4th_2}
-                value={_4th_2}
-                keyboardType="numeric"
-                returnKeyType={_4th_2 && !isNaN(_4th_2) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(_4th_2Ref, _5th_2Ref)}
-                ref={_4th_2Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="toilet"
-                onChangeText={set5th_2}
-                value={_5th_2}
-                keyboardType="numeric"
-                returnKeyType={_5th_2 && !isNaN(_5th_2) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(_5th_2Ref, _1st_3Ref)}
-                ref={_5th_2Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="andet..."
-                onChangeText={set6th_2}
-                value={_6th_2}
-                keyboardType="numeric"
-                returnKeyType="done"
-                ref={_6th_2Ref}
-              />
-            </View>
+              <View style={styles.column}>
+                <Text style={styles.inputGridTitle}>2. måling</Text>
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="bad 1"
+                  onChangeText={set1st_2}
+                  value={_1st_2}
+                  keyboardType="numeric"
+                  returnKeyType={_1st_2 && !isNaN(_1st_2) ? "done" : "next"}
+                  onSubmitEditing={() => handleNextInput(_1st_2Ref, _2nd_2Ref)}
+                  ref={_1st_2Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="bad 2"
+                  onChangeText={set2nd_2}
+                  value={_2nd_2}
+                  keyboardType="numeric"
+                  returnKeyType={_2nd_2 && !isNaN(_2nd_2) ? "done" : "next"}
+                  onSubmitEditing={() => handleNextInput(_2nd_2Ref, _3rd_2Ref)}
+                  ref={_2nd_2Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="køkken"
+                  onChangeText={set3rd_2}
+                  value={_3rd_2}
+                  keyboardType="numeric"
+                  returnKeyType={_3rd_2 && !isNaN(_3rd_2) ? "done" : "next"}
+                  onSubmitEditing={() => handleNextInput(_3rd_2Ref, _4th_2Ref)}
+                  ref={_3rd_2Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="bryggers"
+                  onChangeText={set4th_2}
+                  value={_4th_2}
+                  keyboardType="numeric"
+                  returnKeyType={_4th_2 && !isNaN(_4th_2) ? "done" : "next"}
+                  onSubmitEditing={() => handleNextInput(_4th_2Ref, _5th_2Ref)}
+                  ref={_4th_2Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="toilet"
+                  onChangeText={set5th_2}
+                  value={_5th_2}
+                  keyboardType="numeric"
+                  returnKeyType={_5th_2 && !isNaN(_5th_2) ? "done" : "next"}
+                  onSubmitEditing={() => handleNextInput(_5th_2Ref, _1st_3Ref)}
+                  ref={_5th_2Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="andet..."
+                  onChangeText={set6th_2}
+                  value={_6th_2}
+                  keyboardType="numeric"
+                  returnKeyType="done"
+                  ref={_6th_2Ref}
+                />
+              </View>
 
-            <View style={styles.column}>
-              <Text style={styles.inputGridTitle}>3. måling</Text>
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="bad 1"
-                onChangeText={set1st_3}
-                value={_1st_3}
-                keyboardType="numeric"
-                returnKeyType={_1st_3 && !isNaN(_1st_3) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(_1st_3Ref, _2nd_3Ref)}
-                ref={_1st_3Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="bad 2"
-                onChangeText={set2nd_3}
-                value={_2nd_3}
-                keyboardType="numeric"
-                returnKeyType={_2nd_3 && !isNaN(_2nd_3) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(_2nd_3Ref, _3rd_3Ref)}
-                ref={_2nd_3Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="køkken"
-                onChangeText={set3rd_3}
-                value={_3rd_3}
-                keyboardType="numeric"
-                returnKeyType={_3rd_3 && !isNaN(_3rd_3) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(_3rd_3Ref, _4th_3Ref)}
-                ref={_3rd_3Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="bryggers"
-                onChangeText={set4th_3}
-                value={_4th_3}
-                keyboardType="numeric"
-                returnKeyType={_4th_3 && !isNaN(_4th_3) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(_4th_3Ref, _5th_3Ref)}
-                ref={_4th_3Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="toilet"
-                onChangeText={set5th_3}
-                value={_5th_3}
-                keyboardType="numeric"
-                returnKeyType={_5th_3 && !isNaN(_5th_3) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(_5th_3Ref, _6th_3Ref)}
-                ref={_5th_3Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="andet..."
-                onChangeText={set6th_3}
-                value={_6th_3}
-                keyboardType="numeric"
-                returnKeyType="done"
-                ref={_6th_3Ref}
-              />
+              <View style={styles.column}>
+                <Text style={styles.inputGridTitle}>3. måling</Text>
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="bad 1"
+                  onChangeText={set1st_3}
+                  value={_1st_3}
+                  keyboardType="numeric"
+                  returnKeyType={_1st_3 && !isNaN(_1st_3) ? "done" : "next"}
+                  onSubmitEditing={() => handleNextInput(_1st_3Ref, _2nd_3Ref)}
+                  ref={_1st_3Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="bad 2"
+                  onChangeText={set2nd_3}
+                  value={_2nd_3}
+                  keyboardType="numeric"
+                  returnKeyType={_2nd_3 && !isNaN(_2nd_3) ? "done" : "next"}
+                  onSubmitEditing={() => handleNextInput(_2nd_3Ref, _3rd_3Ref)}
+                  ref={_2nd_3Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="køkken"
+                  onChangeText={set3rd_3}
+                  value={_3rd_3}
+                  keyboardType="numeric"
+                  returnKeyType={_3rd_3 && !isNaN(_3rd_3) ? "done" : "next"}
+                  onSubmitEditing={() => handleNextInput(_3rd_3Ref, _4th_3Ref)}
+                  ref={_3rd_3Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="bryggers"
+                  onChangeText={set4th_3}
+                  value={_4th_3}
+                  keyboardType="numeric"
+                  returnKeyType={_4th_3 && !isNaN(_4th_3) ? "done" : "next"}
+                  onSubmitEditing={() => handleNextInput(_4th_3Ref, _5th_3Ref)}
+                  ref={_4th_3Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="toilet"
+                  onChangeText={set5th_3}
+                  value={_5th_3}
+                  keyboardType="numeric"
+                  returnKeyType={_5th_3 && !isNaN(_5th_3) ? "done" : "next"}
+                  onSubmitEditing={() => handleNextInput(_5th_3Ref, _6th_3Ref)}
+                  ref={_5th_3Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="andet..."
+                  onChangeText={set6th_3}
+                  value={_6th_3}
+                  keyboardType="numeric"
+                  returnKeyType="done"
+                  ref={_6th_3Ref}
+                />
+              </View>
             </View>
+            <Text style={[styles.inputGroupTitle, { paddingTop: 30 }]}>
+              Total mængde luft
+            </Text>
+            <Text style={{ fontSize: 16 }}>{totalAirOut}</Text>
           </View>
-          <Text style={[styles.inputGroupTitle, { paddingTop: 30 }]}>
-            Total mængde luft
-          </Text>
-          <Text style={{ fontSize: 16 }}>{totalAirOut}</Text>
-        </View>
 
-        {/*<View style={styles.inputContainer}>
+          {/*<View style={styles.inputContainer}>
           <Text style={styles.inputGroupTitle}>Bad 1</Text>
           <TextInput
             style={styles.input}
@@ -1061,7 +1100,7 @@ function InputScreen({ navigation }) {
           <Text style={{ fontSize: 16 }}>{totalAirOut}</Text>
         </View>*/}
 
-        {/*<View style={styles.titleContainer}>
+          {/*<View style={styles.titleContainer}>
           <Text
             style={{
               textAlign: "center",
@@ -1074,385 +1113,431 @@ function InputScreen({ navigation }) {
           </Text>
         </View>*/}
 
-        <View style={styles.inputContainer}>
-          <Text style={[styles.inputGroupTitle, { paddingBottom: 10 }]}>
-            Indblæsning
-          </Text>
-          <View style={styles.row}>
-            <View style={styles.column}>
-              <Text style={styles.inputGridTitle}>1. måling</Text>
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Stue"
-                onChangeText={setStue_1}
-                value={stue_1}
-                keyboardType="numeric"
-                returnKeyType={stue_1 && !isNaN(stue_1) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(stue_1Ref, køkken_1Ref)}
-                ref={stue_1Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Køkken/Alrum"
-                onChangeText={setKøkken_1}
-                value={køkken_1}
-                keyboardType="numeric"
-                returnKeyType={køkken_1 && !isNaN(køkken_1) ? "done" : "next"}
-                onSubmitEditing={() =>
-                  handleNextInput(køkken_1Ref, room_1_1Ref)
-                }
-                ref={køkken_1Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Værelse 1"
-                onChangeText={setRoom_1_1}
-                value={room_1_1}
-                keyboardType="numeric"
-                returnKeyType={room_1_1 && !isNaN(room_1_1) ? "done" : "next"}
-                onSubmitEditing={() =>
-                  handleNextInput(room_1_1Ref, room_2_1Ref)
-                }
-                ref={room_1_1Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Værelse 2"
-                onChangeText={setRoom_2_1}
-                value={room_2_1}
-                keyboardType="numeric"
-                returnKeyType={room_2_1 && !isNaN(room_2_1) ? "done" : "next"}
-                onSubmitEditing={() =>
-                  handleNextInput(room_2_1Ref, room_3_1Ref)
-                }
-                ref={room_2_1Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Værelse 3"
-                onChangeText={setRoom_3_1}
-                value={room_3_1}
-                keyboardType="numeric"
-                returnKeyType={room_3_1 && !isNaN(room_3_1) ? "done" : "next"}
-                onSubmitEditing={() =>
-                  handleNextInput(room_3_1Ref, room_4_1Ref)
-                }
-                ref={room_3_1Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Værelse 4"
-                onChangeText={setRoom_4_1}
-                value={room_4_1}
-                keyboardType="numeric"
-                returnKeyType={room_4_1 && !isNaN(room_4_1) ? "done" : "next"}
-                onSubmitEditing={() =>
-                  handleNextInput(room_4_1Ref, room_5_1Ref)
-                }
-                ref={room_4_1Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Værelse 5"
-                onChangeText={setRoom_5_1}
-                value={room_5_1}
-                keyboardType="numeric"
-                returnKeyType={room_5_1 && !isNaN(room_5_1) ? "done" : "next"}
-                onSubmitEditing={() =>
-                  handleNextInput(room_5_1Ref, køkken_ekstra_1Ref)
-                }
-                ref={room_5_1Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Evt køkken"
-                onChangeText={setKøkken_ekstra_1}
-                value={køkken_ekstra_1}
-                keyboardType="numeric"
-                returnKeyType={
-                  køkken_ekstra_1 && !isNaN(køkken_ekstra_1) ? "done" : "next"
-                }
-                onSubmitEditing={() =>
-                  handleNextInput(køkken_ekstra_1Ref, gang_1Ref)
-                }
-                ref={køkken_ekstra_1Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Gang"
-                onChangeText={setGang_1}
-                value={gang_1}
-                keyboardType="numeric"
-                returnKeyType={gang_1 && !isNaN(gang_1) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(gang_1Ref, kontor_1Ref)}
-                ref={gang_1Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="kontor"
-                onChangeText={setKontor_1}
-                value={kontor_1}
-                keyboardType="numeric"
-                returnKeyType={kontor_1 && !isNaN(kontor_1) ? "done" : "next"}
-                ref={kontor_1Ref}
-                onSubmitEditing={() => handleNextInput(kontor_1Ref, stue_2Ref)}
-              />
+          <View style={styles.inputContainer}>
+            <Text style={[styles.inputGroupTitle, { paddingBottom: 10 }]}>
+              Indblæsning
+            </Text>
+            <View style={styles.row}>
+              <View style={styles.column}>
+                <Text style={styles.inputGridTitle}>1. måling</Text>
+                <Text style={styles.subheading}>Stue</Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Stue"
+                  onChangeText={setStue_1}
+                  value={stue_1}
+                  keyboardType="numeric"
+                  returnKeyType={stue_1 && !isNaN(stue_1) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(stue_1Ref, køkken_1Ref)
+                  }
+                  ref={stue_1Ref}
+                />
+                <Text style={styles.subheading}>Køkken/Al...</Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Køkken/Alrum"
+                  onChangeText={setKøkken_1}
+                  value={køkken_1}
+                  keyboardType="numeric"
+                  returnKeyType={køkken_1 && !isNaN(køkken_1) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(køkken_1Ref, room_1_1Ref)
+                  }
+                  ref={køkken_1Ref}
+                />
+                <Text style={styles.subheading}>Værelse 1</Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Værelse 1"
+                  onChangeText={setRoom_1_1}
+                  value={room_1_1}
+                  keyboardType="numeric"
+                  returnKeyType={room_1_1 && !isNaN(room_1_1) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(room_1_1Ref, room_2_1Ref)
+                  }
+                  ref={room_1_1Ref}
+                />
+                <Text style={styles.subheading}>Værelse 2</Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Værelse 2"
+                  onChangeText={setRoom_2_1}
+                  value={room_2_1}
+                  keyboardType="numeric"
+                  returnKeyType={room_2_1 && !isNaN(room_2_1) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(room_2_1Ref, room_3_1Ref)
+                  }
+                  ref={room_2_1Ref}
+                />
+                <Text style={styles.subheading}>Værelse 3</Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Værelse 3"
+                  onChangeText={setRoom_3_1}
+                  value={room_3_1}
+                  keyboardType="numeric"
+                  returnKeyType={room_3_1 && !isNaN(room_3_1) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(room_3_1Ref, room_4_1Ref)
+                  }
+                  ref={room_3_1Ref}
+                />
+                <Text style={styles.subheading}>Værelse 4</Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Værelse 4"
+                  onChangeText={setRoom_4_1}
+                  value={room_4_1}
+                  keyboardType="numeric"
+                  returnKeyType={room_4_1 && !isNaN(room_4_1) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(room_4_1Ref, room_5_1Ref)
+                  }
+                  ref={room_4_1Ref}
+                />
+                <Text style={styles.subheading}>Værelse 5</Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Værelse 5"
+                  onChangeText={setRoom_5_1}
+                  value={room_5_1}
+                  keyboardType="numeric"
+                  returnKeyType={room_5_1 && !isNaN(room_5_1) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(room_5_1Ref, køkken_ekstra_1Ref)
+                  }
+                  ref={room_5_1Ref}
+                />
+                <Text style={styles.subheading}>Evt. køkken</Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Evt køkken"
+                  onChangeText={setKøkken_ekstra_1}
+                  value={køkken_ekstra_1}
+                  keyboardType="numeric"
+                  returnKeyType={
+                    køkken_ekstra_1 && !isNaN(køkken_ekstra_1) ? "done" : "next"
+                  }
+                  onSubmitEditing={() =>
+                    handleNextInput(køkken_ekstra_1Ref, gang_1Ref)
+                  }
+                  ref={køkken_ekstra_1Ref}
+                />
+                <Text style={styles.subheading}>Gang</Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Gang"
+                  onChangeText={setGang_1}
+                  value={gang_1}
+                  keyboardType="numeric"
+                  returnKeyType={gang_1 && !isNaN(gang_1) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(gang_1Ref, kontor_1Ref)
+                  }
+                  ref={gang_1Ref}
+                />
+                <Text style={styles.subheading}>Kontor</Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="kontor"
+                  onChangeText={setKontor_1}
+                  value={kontor_1}
+                  keyboardType="numeric"
+                  returnKeyType={kontor_1 && !isNaN(kontor_1) ? "done" : "next"}
+                  ref={kontor_1Ref}
+                  onSubmitEditing={() =>
+                    handleNextInput(kontor_1Ref, stue_2Ref)
+                  }
+                />
+              </View>
+              <View style={styles.column}>
+                <Text style={styles.inputGridTitle}>2. måling</Text>
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Stue"
+                  onChangeText={setStue_2}
+                  value={stue_2}
+                  keyboardType="numeric"
+                  returnKeyType={stue_2 && !isNaN(stue_2) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(stue_2Ref, køkken_2Ref)
+                  }
+                  ref={stue_2Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Køkken/Alrum"
+                  onChangeText={setKøkken_2}
+                  value={køkken_2}
+                  keyboardType="numeric"
+                  returnKeyType={køkken_2 && !isNaN(køkken_2) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(køkken_2Ref, room_1_2Ref)
+                  }
+                  ref={køkken_2Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Værelse 1"
+                  onChangeText={setRoom_1_2}
+                  value={room_1_2}
+                  keyboardType="numeric"
+                  returnKeyType={room_1_2 && !isNaN(room_1_2) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(room_1_2Ref, room_2_2Ref)
+                  }
+                  ref={room_1_2Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Værelse 2"
+                  onChangeText={setRoom_2_2}
+                  value={room_2_2}
+                  keyboardType="numeric"
+                  returnKeyType={room_2_2 && !isNaN(room_2_2) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(room_2_2Ref, room_3_2Ref)
+                  }
+                  ref={room_2_2Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Værelse 3"
+                  onChangeText={setRoom_3_2}
+                  value={room_3_2}
+                  keyboardType="numeric"
+                  returnKeyType={room_3_2 && !isNaN(room_3_2) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(room_3_2Ref, room_4_2Ref)
+                  }
+                  ref={room_3_2Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Værelse 4"
+                  onChangeText={setRoom_4_2}
+                  value={room_4_2}
+                  keyboardType="numeric"
+                  returnKeyType={room_4_2 && !isNaN(room_4_2) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(room_4_2Ref, room_5_2Ref)
+                  }
+                  ref={room_4_2Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Værelse 5"
+                  onChangeText={setRoom_5_2}
+                  value={room_5_2}
+                  keyboardType="numeric"
+                  returnKeyType={room_5_2 && !isNaN(room_5_2) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(room_5_2Ref, køkken_ekstra_2Ref)
+                  }
+                  ref={room_5_2Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Evt køkken"
+                  onChangeText={setKøkken_ekstra_2}
+                  value={køkken_ekstra_2}
+                  keyboardType="numeric"
+                  returnKeyType={
+                    køkken_ekstra_2 && !isNaN(køkken_ekstra_2) ? "done" : "next"
+                  }
+                  onSubmitEditing={() =>
+                    handleNextInput(køkken_ekstra_2Ref, gang_2Ref)
+                  }
+                  ref={køkken_ekstra_2Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Gang"
+                  onChangeText={setGang_2}
+                  value={gang_2}
+                  keyboardType="numeric"
+                  returnKeyType={gang_2 && !isNaN(gang_2) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(gang_2Ref, kontor_2Ref)
+                  }
+                  ref={gang_2Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="kontor"
+                  onChangeText={setKontor_2}
+                  value={kontor_2}
+                  keyboardType="numeric"
+                  returnKeyType={kontor_2 && !isNaN(kontor_2) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(kontor_2Ref, stue_3Ref)
+                  }
+                  ref={kontor_2Ref}
+                />
+              </View>
+              <View style={styles.column}>
+                <Text style={styles.inputGridTitle}>3. måling</Text>
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Stue"
+                  onChangeText={setStue_3}
+                  value={stue_3}
+                  keyboardType="numeric"
+                  returnKeyType={stue_3 && !isNaN(stue_3) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(stue_3Ref, køkken_3Ref)
+                  }
+                  ref={stue_3Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Køkken/Alrum"
+                  onChangeText={setKøkken_3}
+                  value={køkken_3}
+                  keyboardType="numeric"
+                  returnKeyType={køkken_3 && !isNaN(køkken_3) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(køkken_3Ref, room_1_3Ref)
+                  }
+                  ref={køkken_3Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Værelse 1"
+                  onChangeText={setRoom_1_3}
+                  value={room_1_3}
+                  keyboardType="numeric"
+                  returnKeyType={room_1_3 && !isNaN(room_1_3) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(room_1_3Ref, room_2_3Ref)
+                  }
+                  ref={room_1_3Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Værelse 2"
+                  onChangeText={setRoom_2_3}
+                  value={room_2_3}
+                  keyboardType="numeric"
+                  returnKeyType={room_2_3 && !isNaN(room_2_3) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(room_2_3Ref, room_3_3Ref)
+                  }
+                  ref={room_2_3Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Værelse 3"
+                  onChangeText={setRoom_3_3}
+                  value={room_3_3}
+                  keyboardType="numeric"
+                  returnKeyType={room_3_3 && !isNaN(room_3_3) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(room_3_3Ref, room_4_3Ref)
+                  }
+                  ref={room_3_3Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Værelse 4"
+                  onChangeText={setRoom_4_3}
+                  value={room_4_3}
+                  keyboardType="numeric"
+                  returnKeyType={room_4_3 && !isNaN(room_4_3) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(room_4_3Ref, room_5_3Ref)
+                  }
+                  ref={room_4_3Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Værelse 5"
+                  onChangeText={setRoom_5_3}
+                  value={room_5_3}
+                  keyboardType="numeric"
+                  returnKeyType={room_5_3 && !isNaN(room_5_3) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(room_5_3Ref, køkken_ekstra_3Ref)
+                  }
+                  ref={room_5_3Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Evt køkken"
+                  onChangeText={setKøkken_ekstra_3}
+                  value={køkken_ekstra_3}
+                  keyboardType="numeric"
+                  returnKeyType={
+                    køkken_ekstra_3 && !isNaN(køkken_ekstra_3) ? "done" : "next"
+                  }
+                  onSubmitEditing={() =>
+                    handleNextInput(køkken_ekstra_3Ref, gang_3Ref)
+                  }
+                  ref={køkken_ekstra_3Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="Gang"
+                  onChangeText={setGang_3}
+                  value={gang_3}
+                  keyboardType="numeric"
+                  returnKeyType={gang_3 && !isNaN(gang_3) ? "done" : "next"}
+                  onSubmitEditing={() =>
+                    handleNextInput(gang_3Ref, kontor_3Ref)
+                  }
+                  ref={gang_3Ref}
+                />
+                <Text style={styles.subheading}></Text>
+                <TextInput
+                  style={styles.inputInGrid}
+                  placeholder="kontor"
+                  onChangeText={setKontor_3}
+                  value={kontor_3}
+                  keyboardType="numeric"
+                  returnKeyType="done"
+                  ref={kontor_3Ref}
+                />
+              </View>
             </View>
-            <View style={styles.column}>
-              <Text style={styles.inputGridTitle}>2. måling</Text>
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Stue"
-                onChangeText={setStue_2}
-                value={stue_2}
-                keyboardType="numeric"
-                returnKeyType={stue_2 && !isNaN(stue_2) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(stue_2Ref, køkken_2Ref)}
-                ref={stue_2Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Køkken/Alrum"
-                onChangeText={setKøkken_2}
-                value={køkken_2}
-                keyboardType="numeric"
-                returnKeyType={køkken_2 && !isNaN(køkken_2) ? "done" : "next"}
-                onSubmitEditing={() =>
-                  handleNextInput(køkken_2Ref, room_1_2Ref)
-                }
-                ref={køkken_2Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Værelse 1"
-                onChangeText={setRoom_1_2}
-                value={room_1_2}
-                keyboardType="numeric"
-                returnKeyType={room_1_2 && !isNaN(room_1_2) ? "done" : "next"}
-                onSubmitEditing={() =>
-                  handleNextInput(room_1_2Ref, room_2_2Ref)
-                }
-                ref={room_1_2Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Værelse 2"
-                onChangeText={setRoom_2_2}
-                value={room_2_2}
-                keyboardType="numeric"
-                returnKeyType={room_2_2 && !isNaN(room_2_2) ? "done" : "next"}
-                onSubmitEditing={() =>
-                  handleNextInput(room_2_2Ref, room_3_2Ref)
-                }
-                ref={room_2_2Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Værelse 3"
-                onChangeText={setRoom_3_2}
-                value={room_3_2}
-                keyboardType="numeric"
-                returnKeyType={room_3_2 && !isNaN(room_3_2) ? "done" : "next"}
-                onSubmitEditing={() =>
-                  handleNextInput(room_3_2Ref, room_4_2Ref)
-                }
-                ref={room_3_2Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Værelse 4"
-                onChangeText={setRoom_4_2}
-                value={room_4_2}
-                keyboardType="numeric"
-                returnKeyType={room_4_2 && !isNaN(room_4_2) ? "done" : "next"}
-                onSubmitEditing={() =>
-                  handleNextInput(room_4_2Ref, room_5_2Ref)
-                }
-                ref={room_4_2Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Værelse 5"
-                onChangeText={setRoom_5_2}
-                value={room_5_2}
-                keyboardType="numeric"
-                returnKeyType={room_5_2 && !isNaN(room_5_2) ? "done" : "next"}
-                onSubmitEditing={() =>
-                  handleNextInput(room_5_2Ref, køkken_ekstra_2Ref)
-                }
-                ref={room_5_2Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Evt køkken"
-                onChangeText={setKøkken_ekstra_2}
-                value={køkken_ekstra_2}
-                keyboardType="numeric"
-                returnKeyType={
-                  køkken_ekstra_2 && !isNaN(køkken_ekstra_2) ? "done" : "next"
-                }
-                onSubmitEditing={() =>
-                  handleNextInput(køkken_ekstra_2Ref, gang_2Ref)
-                }
-                ref={køkken_ekstra_2Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Gang"
-                onChangeText={setGang_2}
-                value={gang_2}
-                keyboardType="numeric"
-                returnKeyType={gang_2 && !isNaN(gang_2) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(gang_2Ref, kontor_2Ref)}
-                ref={gang_2Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="kontor"
-                onChangeText={setKontor_2}
-                value={kontor_2}
-                keyboardType="numeric"
-                returnKeyType={kontor_2 && !isNaN(kontor_2) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(kontor_2Ref, stue_3Ref)}
-                ref={kontor_2Ref}
-              />
-            </View>
-            <View style={styles.column}>
-              <Text style={styles.inputGridTitle}>3. måling</Text>
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Stue"
-                onChangeText={setStue_3}
-                value={stue_3}
-                keyboardType="numeric"
-                returnKeyType={stue_3 && !isNaN(stue_3) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(stue_3Ref, køkken_3Ref)}
-                ref={stue_3Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Køkken/Alrum"
-                onChangeText={setKøkken_3}
-                value={køkken_3}
-                keyboardType="numeric"
-                returnKeyType={køkken_3 && !isNaN(køkken_3) ? "done" : "next"}
-                onSubmitEditing={() =>
-                  handleNextInput(køkken_3Ref, room_1_3Ref)
-                }
-                ref={køkken_3Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Værelse 1"
-                onChangeText={setRoom_1_3}
-                value={room_1_3}
-                keyboardType="numeric"
-                returnKeyType={room_1_3 && !isNaN(room_1_3) ? "done" : "next"}
-                onSubmitEditing={() =>
-                  handleNextInput(room_1_3Ref, room_2_3Ref)
-                }
-                ref={room_1_3Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Værelse 2"
-                onChangeText={setRoom_2_3}
-                value={room_2_3}
-                keyboardType="numeric"
-                returnKeyType={room_2_3 && !isNaN(room_2_3) ? "done" : "next"}
-                onSubmitEditing={() =>
-                  handleNextInput(room_2_3Ref, room_3_3Ref)
-                }
-                ref={room_2_3Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Værelse 3"
-                onChangeText={setRoom_3_3}
-                value={room_3_3}
-                keyboardType="numeric"
-                returnKeyType={room_3_3 && !isNaN(room_3_3) ? "done" : "next"}
-                onSubmitEditing={() =>
-                  handleNextInput(room_3_3Ref, room_4_3Ref)
-                }
-                ref={room_3_3Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Værelse 4"
-                onChangeText={setRoom_4_3}
-                value={room_4_3}
-                keyboardType="numeric"
-                returnKeyType={room_4_3 && !isNaN(room_4_3) ? "done" : "next"}
-                onSubmitEditing={() =>
-                  handleNextInput(room_4_3Ref, room_5_3Ref)
-                }
-                ref={room_4_3Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Værelse 5"
-                onChangeText={setRoom_5_3}
-                value={room_5_3}
-                keyboardType="numeric"
-                returnKeyType={room_5_3 && !isNaN(room_5_3) ? "done" : "next"}
-                onSubmitEditing={() =>
-                  handleNextInput(room_5_3Ref, køkken_ekstra_3Ref)
-                }
-                ref={room_5_3Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Evt køkken"
-                onChangeText={setKøkken_ekstra_3}
-                value={køkken_ekstra_3}
-                keyboardType="numeric"
-                returnKeyType={
-                  køkken_ekstra_3 && !isNaN(køkken_ekstra_3) ? "done" : "next"
-                }
-                onSubmitEditing={() =>
-                  handleNextInput(køkken_ekstra_3Ref, gang_3Ref)
-                }
-                ref={køkken_ekstra_3Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="Gang"
-                onChangeText={setGang_3}
-                value={gang_3}
-                keyboardType="numeric"
-                returnKeyType={gang_3 && !isNaN(gang_3) ? "done" : "next"}
-                onSubmitEditing={() => handleNextInput(gang_3Ref, kontor_3Ref)}
-                ref={gang_3Ref}
-              />
-              <TextInput
-                style={styles.inputInGrid}
-                placeholder="kontor"
-                onChangeText={setKontor_3}
-                value={kontor_3}
-                keyboardType="numeric"
-                returnKeyType="done"
-                ref={kontor_3Ref}
-              />
-            </View>
+            <Text style={[styles.inputGroupTitle, { paddingTop: 30 }]}>
+              Total mængde luft
+            </Text>
+            <Text style={{ fontSize: 16 }}>{totalAirIn}</Text>
+
+            <Text style={[styles.inputGroupTitle, { paddingTop: 30 }]}>
+              Minimum m3/h
+            </Text>
+            <Text style={{ fontSize: 16 }}>{minimumAir}</Text>
+
+            <Text style={[styles.inputGroupTitle, { paddingTop: 30 }]}>
+              Undertryk i %
+            </Text>
+            <Text style={{ fontSize: 16 }}>{undertryk} %</Text>
           </View>
-          <Text style={[styles.inputGroupTitle, { paddingTop: 30 }]}>
-            Total mængde luft
-          </Text>
-          <Text style={{ fontSize: 16 }}>{totalAirIn}</Text>
 
-          <Text style={[styles.inputGroupTitle, { paddingTop: 30 }]}>
-            Minimum m3/h
-          </Text>
-          <Text style={{ fontSize: 16 }}>{minimumAir}</Text>
-
-          <Text style={[styles.inputGroupTitle, { paddingTop: 30 }]}>
-            Undertryk i %
-          </Text>
-          <Text style={{ fontSize: 16 }}>{undertryk} %</Text>
-        </View>
-
-        {/*<View style={styles.inputContainer}>
+          {/*<View style={styles.inputContainer}>
           <Text style={styles.inputGroupTitle}>Bad 1</Text>
           <TextInput
             style={styles.input}
@@ -1602,25 +1687,26 @@ function InputScreen({ navigation }) {
           />
         </View>*/}
 
-        {/*<View style={styles.inputContainer}>
+          {/*<View style={styles.inputContainer}>
           <Text style={styles.inputGroupTitle}>Total mængde luft</Text>
           <Text style={{ fontSize: 16 }}>{totalAirOut}</Text>
         </View>*/}
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            if (checkErrors()) {
-              mailBodyName = name;
-              mailBodyCustomer = customerName;
-              mail();
-            }
-          }}
-        >
-          <Text style={styles.buttonText}>Send rapport</Text>
-        </TouchableOpacity>
-      </View>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              if (checkErrors()) {
+                mailBodyName = name;
+                mailBodyCustomer = customerName;
+                mail();
+              }
+            }}
+          >
+            <Text style={styles.buttonText}>Send rapport</Text>
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
     </ScrollView>
   );
 }
@@ -1629,13 +1715,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  bg: {
+    flex: 1,
+    resizeMode: "cover",
+    backgroundColor: "#FCFBFB ",
+  },
   titleContainer: {
     flex: 1,
     marginBottom: 50,
   },
   title: {
     textAlign: "center",
-    fontSize: 30,
+    fontSize: 35,
     fontWeight: "bold",
     marginTop: 100,
   },
@@ -1708,13 +1799,21 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 22,
     fontWeight: "bold",
-    marginBottom: 20,
+    marginBottom: 30,
+    marginTop: 10,
   },
   inputGridTitle: {
     textAlign: "center",
     fontSize: 16,
     fontWeight: "300",
     marginBottom: 20,
+  },
+  label: {
+    fontSize: 15,
+    fontWeight: "600",
+    marginVertical: 6,
+    alignSelf: "flex-start",
+    marginLeft: 35, // fix for mere præcision
   },
   collapseContainer: {
     width: "100%",
@@ -1753,6 +1852,15 @@ const styles = StyleSheet.create({
     top: 60,
     right: 20,
     zIndex: 1,
+  },
+  subheading: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#333",
+    alignSelf: "flex-start",
+    marginTop: 5,
+    marginBottom: 10,
+    height: 20,
   },
 });
 
