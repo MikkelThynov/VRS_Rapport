@@ -1,9 +1,7 @@
 import React from "react";
 import { Image } from "react-native";
 
-const imageSource = Image.resolveAssetSource(
-  require("../Ventilationsrens_logo.png")
-);
+const imageSource = Image.resolveAssetSource(require("../vrs_logo.png"));
 
 function generateContent(
   title,
@@ -484,7 +482,7 @@ function generateContent(
       </style>
     </head>
     <body>
-    <img src="${imageSource.uri}" />
+     <!--<img src="${imageSource.uri}" /> FIX THIS AT SOME POINT... THE IMAGE WON'T RENDER WHEN THE APP IS PUBLISHED-->
       <header>
         <h1>${title}</h1>
         <!--

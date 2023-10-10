@@ -53,7 +53,7 @@ const mail = async () => {
 
     Tusind tak fordi du valgte Ventilationsrens! Vi sender dig hermed en rapport med et overblik over vores arbejde. Hvis du har spørgsmål, er du altid velkommen til at kontakte os.
 
-    Husk at dit anlæg bør renses hvert 2. år, så du undgår en kortere levetid og et dårligt indeklima.
+    Husk at dit anlæg bør renses efter 2-5 år, så undgår du en kortere levetid, større strømforbrug og et dårligt indeklima.
 
     ${mailBodyName}
     Ventilationsrens
@@ -1524,17 +1524,17 @@ function InputScreen({ navigation }) {
             <Text style={[styles.inputGroupTitle, { paddingTop: 30 }]}>
               Total mængde luft
             </Text>
-            <Text style={{ fontSize: 16 }}>{totalAirIn}</Text>
+            <Text style={{ fontSize: 16 }}>{totalAirIn.toFixed(1)}</Text>
 
             <Text style={[styles.inputGroupTitle, { paddingTop: 30 }]}>
               Minimum m3/h
             </Text>
-            <Text style={{ fontSize: 16 }}>{minimumAir}</Text>
+            <Text style={{ fontSize: 16 }}>{minimumAir.toFixed(1)}</Text>
 
             <Text style={[styles.inputGroupTitle, { paddingTop: 30 }]}>
               Undertryk i %
             </Text>
-            <Text style={{ fontSize: 16 }}>{undertryk} %</Text>
+            <Text style={{ fontSize: 16 }}>{undertryk.toFixed(2)} %</Text>
           </View>
 
           {/*<View style={styles.inputContainer}>
