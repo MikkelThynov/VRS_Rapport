@@ -15,17 +15,16 @@
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/9f847b46-2449-41a9-b45a-966158b166bf"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+        "foregroundImage": "./assets/vrs-icon.png",
+        "backgroundColor": "#0F0F0F"
+      },
+      "package": "com.thynovdev.VRS_Rapport"
     },
     "web": {
       "favicon": "./assets/favicon.png"
