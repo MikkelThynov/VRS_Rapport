@@ -15,6 +15,14 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import WelcomeScreen from "./assets/screens/WelcomeScreen";
 import InputScreen from "./assets/screens/InputScreen";
 import SettingsScreen from "./assets/screens/SettingsScreen";
+import ManualsScreen from "./assets/screens/ManualsScreen";
+import StatisticsSreen from "./assets/screens/StatisticsScreen";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+import { vrsApp } from "./firebase-config";
+import { MailContext } from "./assets/screens/ManualsScreen";
+
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 import * as fs from "expo-file-system";
 import * as share from "expo-sharing";
@@ -26,7 +34,7 @@ import { sendMail } from "./assets/components/sendMail";
 import * as Print from "expo-print";
 import generateContent from "./assets/components/pdfTemplate01";
 
-const saveXsxlFile = async (file, nameOfFile) => {
+/*const saveXsxlFile = async (file, nameOfFile) => {
   const name = nameOfFile;
   const fileUri = fs.cacheDirectory + nameOfFile;
 
@@ -56,26 +64,73 @@ const generateExcel = async (fn) => {
   const wbout = XLSX.write(wb, { type: "base64", bookType: "xlsx" });
 
   saveXsxlFile(wbout, fn);
-};
+};*/
+
+const CustomButton = ({ onPress }) => (
+  <TouchableOpacity onPress={onPress} style={styles.customButton}>
+    <Text style={styles.buttonText}>Custom Button</Text>
+  </TouchableOpacity>
+);
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const HomeTabs = () => (
+  <Tab.Navigator
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, color, size }) => {
+        let iconName;
+
+        if (route.name === "Udfyld rapport") {
+          iconName = focused ? "document-text" : "document-text-outline";
+        } else if (route.name === "Manualer") {
+          iconName = focused ? "book" : "book-outline";
+        } else if (route.name === "Statistik") {
+          iconName = focused ? "stats-chart" : "stats-chart-outline";
+        } else if (route.name === "Settings") {
+          iconName = focused ? "settings" : "settings-outline";
+        }
+
+        // You can return any component that you like here!
+        return <Ionicons name={iconName} size={size} color={color} />;
+      },
+      headerShown: false,
+    })}
+    tabBarOptions={{
+      activeTintColor: "orange",
+      inactiveTintColor: "gray",
+    }}
+  >
+    <Tab.Screen name="Udfyld rapport" component={InputScreen} />
+    <Tab.Screen name="Manualer" component={ManualsScreen} />
+    <Tab.Screen name="Statistik" component={StatisticsSreen} />
+    <Tab.Screen name="Settings" component={SettingsScreen} />
+  </Tab.Navigator>
+);
+
+const AppNavigator = () => (
+  <Stack.Navigator
+    initialRouteName="Welcome"
+    screenOptions={{ headerShown: false }}
+  >
+    <Stack.Screen name="Welcome" component={WelcomeScreen} />
+    <Stack.Screen name="Home" component={HomeTabs} />
+  </Stack.Navigator>
+);
 
 export default function App() {
+  console.log(vrsApp);
   const [text, onChangeText] = React.useState("Filnavn");
+  const [mailCount, setMailCount] = React.useState(0);
   if (text === null) {
     text = "Rapport";
   }
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Welcome"
-        screenOptions={{ headerShown: false }}
-      >
-        <Stack.Screen name="Welcome" component={WelcomeScreen} />
-        <Stack.Screen name="Input" component={InputScreen} />
-        <Stack.Screen name="Settings" component={SettingsScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <MailContext.Provider value={{ mailCount, setMailCount }}>
+      <NavigationContainer>
+        <AppNavigator />
+      </NavigationContainer>
+    </MailContext.Provider>
   );
 }
 

@@ -32,7 +32,7 @@ function WelcomeScreen({ navigation }) {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate("Input")}
+          onPress={() => navigation.navigate("Home")}
         >
           <Text style={styles.buttonText}>Lav rapport</Text>
         </TouchableOpacity>

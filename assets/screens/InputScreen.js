@@ -1699,7 +1699,11 @@ function InputScreen({ navigation }) {
               if (checkErrors()) {
                 mailBodyName = name;
                 mailBodyCustomer = customerName;
-                mail();
+                mail().then(() => {
+                  console.log("Your message was successfully sent!");
+                  setMailCount((prevCount) => prevCount + 1); // Increment the mail count
+                  console.log("Mail count: " + mailCount);
+                });
               }
             }}
           >
@@ -1728,7 +1732,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 35,
     fontWeight: "bold",
-    marginTop: 100,
+    marginTop: 80,
   },
   inputContainer: {
     width: "90%",
@@ -1791,7 +1795,7 @@ const styles = StyleSheet.create({
   buttonText: {
     textAlign: "center",
     color: "#fff",
-    fontSize: "20",
+    fontSize: 20,
     textTransform: "uppercase",
     fontWeight: "400",
   },
