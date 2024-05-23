@@ -365,7 +365,8 @@ function InputScreen({ navigation }) {
 
   //calculates minimum air pr m3/h
   function calcMinAir() {
-    let minimumAir = parseFloat(m2) * 0.3 * 3.6;
+    let minimumAir = parseFloat((parseFloat(m2) * 0.3 * 3.6).toFixed(1));
+    console.log("minAir: " + minimumAir + " , m2: " + m2);
     setMinimumAir(minimumAir);
     // set minimum air in pdf first
   }
