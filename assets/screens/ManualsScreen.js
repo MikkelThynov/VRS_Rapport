@@ -10,7 +10,6 @@ import {
   TextInput,
 } from "react-native";
 import { getStorage, ref, getDownloadURL, listAll } from "firebase/storage";
-//import RNFS from "react-native-fs";
 //import { DocumentPicker } from "react-native-document-picker";
 import * as FileSystem from "expo-file-system";
 import * as Sharing from "expo-sharing";
