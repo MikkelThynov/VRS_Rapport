@@ -82,7 +82,23 @@ function generateContent(
   kontor_3,
   totalAirIn,
   minimumAir,
-  undertryk
+  undertryk,
+  badTitle_ud,
+  bad2Title_ud,
+  køkkenTitle_ud,
+  bryggersTitle_ud,
+  toiletTitle_ud,
+  AndetTitle_ud,
+  stueTitle_ind,
+  køkkenTitle_ind,
+  room_1Title_ind,
+  room_2Title_ind,
+  room_3Title_ind,
+  room_4Title_ind,
+  room_5Title_ind,
+  køkken_ekstraTitle_ind,
+  gangTitle_ind,
+  kontorTitle_ind,
 ) {
   const udsugning = {
     rum6: _rum6,
@@ -105,6 +121,12 @@ function generateContent(
     _6th_1: _6th_1,
     _6th_2: _6th_2,
     _6th_3: _6th_3,
+    badTitle_ud: badTitle_ud,
+    bad2Title_ud: bad2Title_ud,
+    køkkenTitle_ud: køkkenTitle_ud,
+    bryggersTitle_ud: bryggersTitle_ud,
+    toiletTitle_ud: toiletTitle_ud,
+    AndetTitle_ud: AndetTitle_ud,
   };
 
   const indblæsning = {
@@ -139,6 +161,18 @@ function generateContent(
     gang_3: gang_3,
     kontor_3: kontor_3,
     totalAirIn: totalAirIn,
+    minimumAir: minimumAir,
+    undertryk: undertryk,
+    stueTitle_ind: stueTitle_ind,
+    køkkenTitle_ind: køkkenTitle_ind,
+    room_1Title_ind: room_1Title_ind,
+    room_2Title_ind: room_2Title_ind,
+    room_3Title_ind: room_3Title_ind,
+    room_4Title_ind: room_4Title_ind,
+    room_5Title_ind: room_5Title_ind,
+    køkken_ekstraTitle_ind: køkken_ekstraTitle_ind,
+    gangTitle_ind: gangTitle_ind,
+    kontorTitle_ind: kontorTitle_ind,
   };
 
   const htmlStyles = `
@@ -600,7 +634,7 @@ function generateContent(
           <!-- Row 1 -->
             <tr>
               <td style="width: 10%"><span>1</span></th>
-              <td style="width: 23.33%"><span>Bad 1</span></th>
+              <td style="width: 23.33%"><span>${udsugning.badTitle_ud}</span></th>
               <td style="width: 25.33%"><span>54</span></th>
               <td style="width: 8%"><span>m3/h</span></th>
               <td style="width: 11.11%"><span>${udsugning._1st_1}</span></th>
@@ -611,7 +645,7 @@ function generateContent(
           <thead>
             <tr>
               <td style="width: 10%"><span>1</span></th>
-              <td style="width: 23.33%"><span>Bad 2</span></th>
+              <td style="width: 23.33%"><span>${udsugning.bad2Title_ud}</span></th>
               <td style="width: 25.33%"><span>54</span></th>
               <td style="width: 8%"><span>m3/h</span></th>
               <td style="width: 11.11%"><span>${udsugning._2nd_1}</span></th>
@@ -622,7 +656,7 @@ function generateContent(
           <thead>
             <tr>
               <td style="width: 10%"><span>1</span></th>
-              <td style="width: 23.33%"><span>Køkken</span></th>
+              <td style="width: 23.33%"><span>${udsugning.køkkenTitle_ud}</span></th>
               <td style="width: 25.33%"><span>72</span></th>
               <td style="width: 8%"><span>m3/h</span></th>
               <td style="width: 11.11%"><span>${udsugning._3rd_1}</span></th>
@@ -633,7 +667,7 @@ function generateContent(
           <thead>
             <tr>
               <td style="width: 10%"><span>1</span></th>
-              <td style="width: 23.33%"><span>Bryggers</span></th>
+              <td style="width: 23.33%"><span>${udsugning.bryggersTitle_ud}</span></th>
               <td style="width: 25.33%"><span>36</span></th>
               <td style="width: 8%"><span>m3/h</span></th>
               <td style="width: 11.11%"><span>${udsugning._4th_1}</span></th>
@@ -644,7 +678,7 @@ function generateContent(
           <thead>
             <tr>
               <td style="width: 10%"><span>1</span></th>
-              <td style="width: 23.33%"><span>Toilet</span></th>
+              <td style="width: 23.33%"><span>${udsugning.toiletTitle_ud}</span></th>
               <td style="width: 25.33%"><span>36</span></th>
               <td style="width: 8%"><span>m3/h</span></th>
               <td style="width: 11.11%"><span>${udsugning._5th_1}</span></th>
@@ -689,7 +723,7 @@ function generateContent(
           <thead>
             <tr>
               <td style="width: 10%"><span>1</span></th>
-              <td style="width: 23.33%"><span>Stue</span></th>
+              <td style="width: 23.33%"><span>${indblæsning.stueTitle_ind}</span></th>
               <td style="width: 25.33%"><span>0,3 m3/h pr m2</span></th>
               <td style="width: 8%"><span></span></th>
               <td style="width: 11.11%"><span>${indblæsning.stue_1}</span></th>
@@ -700,7 +734,7 @@ function generateContent(
           <thead>
             <tr>
               <td style="width: 10%"><span>1</span></th>
-              <td style="width: 23.33%"><span>Køkken/Alrum</span></th>
+              <td style="width: 23.33%"><span>${indblæsning.køkkenTitle_ind}</span></th>
               <td style="width: 25.33%"><span>0,3 m3/h pr m2</span></th>
               <td style="width: 8%"><span></span></th>
               <td style="width: 11.11%"><span>${indblæsning.køkken_1}</span></th>
@@ -711,7 +745,7 @@ function generateContent(
           <thead>
             <tr>
               <td style="width: 10%"><span>1</span></th>
-              <td style="width: 23.33%"><span>Værelse 1</span></th>
+              <td style="width: 23.33%"><span>${indblæsning.room_1Title_ind}</span></th>
               <td style="width: 25.33%"><span>0,3 m3/h pr m2</span></th>
               <td style="width: 8%"><span></span></th>
               <td style="width: 11.11%"><span>${indblæsning.room_1_1}</span></th>
@@ -722,7 +756,7 @@ function generateContent(
           <thead>
             <tr>
               <td style="width: 10%"><span>1</span></th>
-              <td style="width: 23.33%"><span>Værelse 2</span></th>
+              <td style="width: 23.33%"><span>${indblæsning.room_2Title_ind}</span></th>
               <td style="width: 25.33%"><span>0,3 m3/h pr m2</span></th>
               <td style="width: 8%"><span></span></th>
               <td style="width: 11.11%"><span>${indblæsning.room_2_1}</span></th>
@@ -734,7 +768,7 @@ function generateContent(
           <thead>
             <tr>
               <td style="width: 10%"><span>1</span></th>
-              <td style="width: 23.33%"><span>Værelse 3</span></th>
+              <td style="width: 23.33%"><span>${indblæsning.room_3Title_ind}</span></th>
               <td style="width: 25.33%"><span>0,3 m3/h pr m2</span></th>
               <td style="width: 8%"><span></span></th>
               <td style="width: 11.11%"><span>${indblæsning.room_3_1}</span></th>
@@ -746,7 +780,7 @@ function generateContent(
           <thead>
             <tr>
               <td style="width: 10%"><span>1</span></th>
-              <td style="width: 23.33%"><span>Værelse 4</span></th>
+              <td style="width: 23.33%"><span>${indblæsning.room_4Title_ind}</span></th>
               <td style="width: 25.33%"><span>0,3 m3/h pr m2</span></th>
               <td style="width: 8%"><span></span></th>
               <td style="width: 11.11%"><span>${indblæsning.room_4_1}</span></th>
@@ -757,7 +791,7 @@ function generateContent(
           <thead>
             <tr>
               <td style="width: 10%"><span>1</span></th>
-              <td style="width: 23.33%"><span>Værelse 5</span></th>
+              <td style="width: 23.33%"><span>${indblæsning.room_5Title_ind}</span></th>
               <td style="width: 25.33%"><span>0,3 m3/h pr m2</span></th>
               <td style="width: 8%"><span></span></th>
               <td style="width: 11.11%"><span>${indblæsning.room_5_1}</span></th>
@@ -768,7 +802,7 @@ function generateContent(
           <thead>
             <tr>
               <td style="width: 10%"><span>1</span></th>
-              <td style="width: 23.33%"><span>Evt køkken</span></th>
+              <td style="width: 23.33%"><span>${indblæsning.køkken_ekstraTitle_ind}</span></th>
               <td style="width: 25.33%"><span>0,3 m3/h pr m2</span></th>
               <td style="width: 8%"><span></span></th>
               <td style="width: 11.11%"><span>${indblæsning.køkken_ekstra_1}</span></th>
@@ -780,7 +814,7 @@ function generateContent(
           <thead>
             <tr>
               <td style="width: 10%"><span>1</span></th>
-              <td style="width: 23.33%"><span>Gang</span></th>
+              <td style="width: 23.33%"><span>${indblæsning.gangTitle_ind}</span></th>
               <td style="width: 25.33%"><span>0,3 m3/h pr m2</span></th>
               <td style="width: 8%"><span></span></th>
               <td style="width: 11.11%"><span>${indblæsning.gang_1}</span></th>
@@ -791,7 +825,7 @@ function generateContent(
           <thead>
             <tr>
               <td style="width: 10%"><span>1</span></th>
-              <td style="width: 23.33%"><span>Værelse 4</span></th>
+              <td style="width: 23.33%"><span>${indblæsning.kontorTitle_ind}</span></th>
               <td style="width: 25.33%"><span>0,3 m3/h pr m2</span></th>
               <td style="width: 8%"><span></span></th>
               <td style="width: 11.11%"><span>${indblæsning.kontor_1}</span></th>

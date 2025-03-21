@@ -225,6 +225,27 @@ function InputScreen({ navigation }) {
   const [c4_ja, setC4Ja] = useState("");
   const [c4_nej, setC4Nej] = useState("");
 
+  // Udsugning titles
+  const [titleBad2_ud, setTitleBad2_ud] = useState("Bad 2");
+  const [titleKøkken_ud, setTitleKøkken_ud] = useState("Køkken");
+  const [titleBryggers_ud, setTitleBryggers_ud] = useState("Bryggers");
+  const [titleToilet_ud, setTitleToilet_ud] = useState("Toilet");
+  const [titleAndet_ud, setTitleAndet_ud] = useState("Andet");
+
+  // Indblæsning titles
+  const [stueTitle_ind, setStueTitle_ind] = useState("Stue");
+  const [køkkenTitle_ind, setKøkkenTitle_ind] = useState("Køkken/Alrum");
+  const [room_1Title_ind, setRoom_1Title_ind] = useState("Værelse 1");
+  const [room_2Title_ind, setRoom_2Title_ind] = useState("Værelse 2");
+  const [room_3Title_ind, setRoom_3Title_ind] = useState("Værelse 3");
+  const [room_4Title_ind, setRoom_4Title_ind] = useState("Værelse 4");
+  const [room_5Title_ind, setRoom_5Title_ind] = useState("Værelse 5");
+  const [køkken_ekstraTitle_ind, setKøkken_ekstraTitle_ind] =
+    useState("Evt. køkken");
+  const [gangTitle_ind, setGangTitle_ind] = useState("Gang");
+  const [kontorTitle_ind, setKontorTitle_ind] = useState("Kontor");
+  const [titleBad1_ud, setTitleBad1_ud] = useState("Bad 1");
+
   const handleCheckboxPress = (index, isChecked) => {
     const newCheckboxes = [...checkboxes];
     newCheckboxes[index].isChecked = isChecked;
@@ -532,7 +553,23 @@ function InputScreen({ navigation }) {
     kontor_3,
     totalAirIn,
     minimumAir,
-    undertryk
+    undertryk,
+    titleBad1_ud,
+    titleBad2_ud,
+    titleKøkken_ud,
+    titleBryggers_ud,
+    titleToilet_ud,
+    titleAndet_ud,
+    stueTitle_ind,
+    køkkenTitle_ind,
+    room_1Title_ind,
+    room_2Title_ind,
+    room_3Title_ind,
+    room_4Title_ind,
+    room_5Title_ind,
+    køkken_ekstraTitle_ind,
+    gangTitle_ind,
+    kontorTitle_ind
   );
 
   return (
@@ -565,6 +602,7 @@ function InputScreen({ navigation }) {
           </CollapseBody>
         </Collapse>*/}
 
+          {/* ---------------- GRUNDLÆGGEND INFO -------------- */}
           <View style={styles.inputContainer}>
             <Text style={styles.inputGroupTitle}>Grundlæggende info</Text>
             <Text style={styles.label}>Navn på tekniker</Text>
@@ -735,7 +773,14 @@ function InputScreen({ navigation }) {
             <View style={styles.row}>
               <View style={styles.column}>
                 <Text style={styles.inputGridTitle}>1. måling</Text>
-                <Text style={styles.subheading}>Bad 1</Text>
+                {/*<Text style={styles.subheading}>Bad 1</Text>*/}
+
+                <TextInput
+                  style={styles.subheading}
+                  value={titleBad1_ud}
+                  onChangeText={setTitleBad1_ud}
+                  placeholder="Skriv rum"
+                />
                 <TextInput
                   style={styles.inputInGrid}
                   placeholder="bad 1"
@@ -746,7 +791,12 @@ function InputScreen({ navigation }) {
                   onSubmitEditing={() => handleNextInput(_1st_1Ref, _2nd_1Ref)}
                   ref={_1st_1Ref}
                 />
-                <Text style={styles.subheading}>Bad 2</Text>
+                <TextInput
+                  style={styles.subheading}
+                  value={titleBad2_ud}
+                  onChangeText={setTitleBad2_ud}
+                  placeholder="Skriv rum"
+                />
                 <TextInput
                   style={styles.inputInGrid}
                   placeholder="bad 2"
@@ -757,7 +807,12 @@ function InputScreen({ navigation }) {
                   onSubmitEditing={() => handleNextInput(_2nd_1Ref, _3rd_1Ref)}
                   ref={_2nd_1Ref}
                 />
-                <Text style={styles.subheading}>Køkken</Text>
+                <TextInput
+                  style={styles.subheading}
+                  value={titleKøkken_ud}
+                  onChangeText={setTitleKøkken_ud}
+                  placeholder="Skriv rum"
+                />
                 <TextInput
                   style={styles.inputInGrid}
                   placeholder="køkken"
@@ -768,7 +823,12 @@ function InputScreen({ navigation }) {
                   onSubmitEditing={() => handleNextInput(_3rd_1Ref, _4th_1Ref)}
                   ref={_3rd_1Ref}
                 />
-                <Text style={styles.subheading}>Bryggers</Text>
+                <TextInput
+                  style={styles.subheading}
+                  value={titleBryggers_ud}
+                  onChangeText={setTitleBryggers_ud}
+                  placeholder="Skriv rum"
+                />
                 <TextInput
                   style={styles.inputInGrid}
                   placeholder="bryggers"
@@ -779,7 +839,12 @@ function InputScreen({ navigation }) {
                   onSubmitEditing={() => handleNextInput(_4th_1Ref, _5th_1Ref)}
                   ref={_4th_1Ref}
                 />
-                <Text style={styles.subheading}>Toilet</Text>
+                <TextInput
+                  style={styles.subheading}
+                  value={titleToilet_ud}
+                  onChangeText={setTitleToilet_ud}
+                  placeholder="Skriv rum"
+                />
                 <TextInput
                   style={styles.inputInGrid}
                   placeholder="toilet"
@@ -790,7 +855,12 @@ function InputScreen({ navigation }) {
                   onSubmitEditing={() => handleNextInput(_5th_1Ref, _1st_2Ref)}
                   ref={_5th_1Ref}
                 />
-                <Text style={styles.subheading}>Andet</Text>
+                <TextInput
+                  style={styles.subheading}
+                  value={titleAndet_ud}
+                  onChangeText={setTitleAndet_ud}
+                  placeholder="Skriv rum"
+                />
                 <TextInput
                   style={styles.inputInGrid}
                   placeholder="andet..."
@@ -1121,7 +1191,12 @@ function InputScreen({ navigation }) {
             <View style={styles.row}>
               <View style={styles.column}>
                 <Text style={styles.inputGridTitle}>1. måling</Text>
-                <Text style={styles.subheading}>Stue</Text>
+                <TextInput
+                  style={styles.subheading}
+                  value={stueTitle_ind}
+                  onChangeText={setStueTitle_ind}
+                  placeholder="Skriv rum"
+                />
                 <TextInput
                   style={styles.inputInGrid}
                   placeholder="Stue"
@@ -1134,7 +1209,12 @@ function InputScreen({ navigation }) {
                   }
                   ref={stue_1Ref}
                 />
-                <Text style={styles.subheading}>Køkken/Al...</Text>
+                <TextInput
+                  style={styles.subheading}
+                  value={køkkenTitle_ind}
+                  onChangeText={setKøkkenTitle_ind}
+                  placeholder="Skriv rum"
+                />
                 <TextInput
                   style={styles.inputInGrid}
                   placeholder="Køkken/Alrum"
@@ -1147,7 +1227,12 @@ function InputScreen({ navigation }) {
                   }
                   ref={køkken_1Ref}
                 />
-                <Text style={styles.subheading}>Værelse 1</Text>
+                <TextInput
+                  style={styles.subheading}
+                  value={room_1Title_ind}
+                  onChangeText={setRoom_1Title_ind}
+                  placeholder="Skriv rum"
+                />
                 <TextInput
                   style={styles.inputInGrid}
                   placeholder="Værelse 1"
@@ -1160,7 +1245,12 @@ function InputScreen({ navigation }) {
                   }
                   ref={room_1_1Ref}
                 />
-                <Text style={styles.subheading}>Værelse 2</Text>
+                <TextInput
+                  style={styles.subheading}
+                  value={room_2Title_ind}
+                  onChangeText={setRoom_2Title_ind}
+                  placeholder="Skriv rum"
+                />
                 <TextInput
                   style={styles.inputInGrid}
                   placeholder="Værelse 2"
@@ -1173,7 +1263,12 @@ function InputScreen({ navigation }) {
                   }
                   ref={room_2_1Ref}
                 />
-                <Text style={styles.subheading}>Værelse 3</Text>
+                <TextInput
+                  style={styles.subheading}
+                  value={room_3Title_ind}
+                  onChangeText={setRoom_3Title_ind}
+                  placeholder="Skriv rum"
+                />
                 <TextInput
                   style={styles.inputInGrid}
                   placeholder="Værelse 3"
@@ -1186,7 +1281,12 @@ function InputScreen({ navigation }) {
                   }
                   ref={room_3_1Ref}
                 />
-                <Text style={styles.subheading}>Værelse 4</Text>
+                <TextInput
+                  style={styles.subheading}
+                  value={room_4Title_ind}
+                  onChangeText={setRoom_4Title_ind}
+                  placeholder="Skriv rum"
+                />
                 <TextInput
                   style={styles.inputInGrid}
                   placeholder="Værelse 4"
@@ -1199,7 +1299,12 @@ function InputScreen({ navigation }) {
                   }
                   ref={room_4_1Ref}
                 />
-                <Text style={styles.subheading}>Værelse 5</Text>
+                <TextInput
+                  style={styles.subheading}
+                  value={room_5Title_ind}
+                  onChangeText={setRoom_5Title_ind}
+                  placeholder="Skriv rum"
+                />
                 <TextInput
                   style={styles.inputInGrid}
                   placeholder="Værelse 5"
@@ -1212,7 +1317,12 @@ function InputScreen({ navigation }) {
                   }
                   ref={room_5_1Ref}
                 />
-                <Text style={styles.subheading}>Evt. køkken</Text>
+                <TextInput
+                  style={styles.subheading}
+                  value={køkken_ekstraTitle_ind}
+                  onChangeText={setKøkken_ekstraTitle_ind}
+                  placeholder="Skriv rum"
+                />
                 <TextInput
                   style={styles.inputInGrid}
                   placeholder="Evt køkken"
@@ -1227,7 +1337,12 @@ function InputScreen({ navigation }) {
                   }
                   ref={køkken_ekstra_1Ref}
                 />
-                <Text style={styles.subheading}>Gang</Text>
+                <TextInput
+                  style={styles.subheading}
+                  value={gangTitle_ind}
+                  onChangeText={setGangTitle_ind}
+                  placeholder="Skriv rum"
+                />
                 <TextInput
                   style={styles.inputInGrid}
                   placeholder="Gang"
@@ -1240,7 +1355,12 @@ function InputScreen({ navigation }) {
                   }
                   ref={gang_1Ref}
                 />
-                <Text style={styles.subheading}>Kontor</Text>
+                <TextInput
+                  style={styles.subheading}
+                  value={kontorTitle_ind}
+                  onChangeText={setKontorTitle_ind}
+                  placeholder="Skriv rum"
+                />
                 <TextInput
                   style={styles.inputInGrid}
                   placeholder="kontor"
